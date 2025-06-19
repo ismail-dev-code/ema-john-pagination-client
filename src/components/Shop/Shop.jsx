@@ -12,8 +12,23 @@ import { Link, useLoaderData } from "react-router-dom";
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-  const {count} = useLoaderData();
-  console.log(count);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const { count } = useLoaderData();
+
+  const numberOfPages = Math.ceil(count / itemsPerPage);
+
+  // eita ekta system hoitei pare
+  // const pages = [];
+  // for (let i = 0; i < numberOfPages; i++) {
+  //   pages.push(i);
+  // }
+  // console.log(pages);
+  const pages = [...Array(numberOfPages).keys()];
+
+  const handleItemsPerPage = (e) => {
+    const val = parseInt(e.target.value);
+    setItemsPerPage(val);
+  };
 
   useEffect(() => {
     fetch("http://localhost:5000/products")
@@ -83,6 +98,22 @@ const Shop = () => {
             <button className="btn-proceed">Review Order</button>
           </Link>
         </Cart>
+      </div>
+      <div className="pagination">
+        {pages.map((page) => (
+          <button key={page}>{page}</button>
+        ))}
+        <select
+          name=""
+          value={itemsPerPage}
+          onChange={handleItemsPerPage}
+          id=""
+        >
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+        </select>
       </div>
     </div>
   );
