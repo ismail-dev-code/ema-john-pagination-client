@@ -103,6 +103,6 @@ ema-john-simple/
 
 ## 📜 License
 
-This project is for educational purposes and does not include any license by default. Please add a license if needed.
+This project is for educational purposes and does not include any license by default. 
 
 ---
